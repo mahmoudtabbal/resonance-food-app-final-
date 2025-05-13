@@ -11,13 +11,17 @@ def load_data():
 
 st.set_page_config(page_title="Dr. Tabbal Resonance App", layout="wide")
 
-# Load images with error handling
+# Center-aligned logo and title with dowsing chart below
 try:
-    logo = Image.open("clinic_logo.jpg")
-    chart = Image.open("dowsing_chart.jpg")
-    st.image(logo, width=150)
-    st.title("Dr. Mahmoud Tabbal Diabetes Endocrine Center")
-    st.image(chart, width=400)
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        logo = Image.open("clinic_logo.jpg")
+        st.image(logo, width=100)
+
+    st.markdown("<h1 style='text-align: center;'>Dr. Mahmoud Tabbal Diabetes Endocrine Center</h1>", unsafe_allow_html=True)
+
+    dowsing_chart = Image.open("dowsing_chart.jpg")
+    st.image(dowsing_chart, width=600)
 except Exception as e:
     st.error(f"Error loading images: {e}")
 
@@ -47,9 +51,9 @@ if st.button("Save and Next"):
     if st.session_state.index < len(st.session_state.data) - 1:
         st.session_state.index += 1
     else:
-        st.success("✅ All items processed!")
+        st.success("â All items processed!")
 
-with st.expander("📤 Generate PDF Report"):
+with st.expander("ð¤ Generate PDF Report"):
     dosha = st.selectbox("Filter by Dosha", ["All", "Vata", "Pitta", "Kapha", "Tridoshic"])
     metabolic_filter = st.selectbox("Filter by Metabolic Type", ["All", "Fast Oxidizer", "Slow Oxidizer", "Mixed Oxidizer"])
     resonance_filter = st.selectbox("Filter by Resonance", ["Compatible", "Incompatible", "Limited", "Neutral"])
@@ -83,5 +87,5 @@ with st.expander("📤 Generate PDF Report"):
     if st.button("Download PDF Report"):
         pdf_bytes = create_pdf(filtered)
         b64 = base64.b64encode(pdf_bytes).decode()
-        href = f'<a href="data:application/octet-stream;base64,{b64}" download="Resonance_Food_Report.pdf">📥 Download PDF</a>'
+        href = f'<a href="data:application/octet-stream;base64,{b64}" download="Resonance_Food_Report.pdf">ð¥ Download PDF</a>'
         st.markdown(href, unsafe_allow_html=True)
