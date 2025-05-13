@@ -3,15 +3,24 @@ import streamlit as st
 import pandas as pd
 from fpdf import FPDF
 import base64
+from PIL import Image
 
 @st.cache_data
 def load_data():
     return pd.read_excel("Unified_Food_Compatibility_Table_With_Resonance.xlsx")
 
 st.set_page_config(page_title="Dr. Tabbal Resonance App", layout="wide")
-st.image("clinic_logo.jpg", width=150)
-st.title("Dr. Mahmoud Tabbal Diabetes Endocrine Center")
-st.image("dowsing_chart.jpg", width=400)
+
+# Load images with error handling
+try:
+    logo = Image.open("clinic_logo.jpg")
+    chart = Image.open("dowsing_chart.jpg")
+    st.image(logo, width=150)
+    st.title("Dr. Mahmoud Tabbal Diabetes Endocrine Center")
+    st.image(chart, width=400)
+except Exception as e:
+    st.error(f"Error loading images: {e}")
+
 st.markdown("<hr style='border:1px solid gray'>", unsafe_allow_html=True)
 
 st.sidebar.header("Patient Information")
