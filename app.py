@@ -24,7 +24,7 @@ try:
         st.markdown("<h3>Diabetes Endocrine Center</h3>", unsafe_allow_html=True)
 
         dowsing_chart = Image.open("clinic_logo.jpg")
-        st.image(dowsing_chart, width=500)
+        st.image(dowsing_chart, width=900)
 
         st.markdown("</div>", unsafe_allow_html=True)
 except Exception as e:
