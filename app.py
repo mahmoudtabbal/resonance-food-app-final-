@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 from fpdf import FPDF
@@ -8,18 +9,16 @@ def load_data():
     return pd.read_excel("Unified_Food_Compatibility_Table_With_Resonance.xlsx")
 
 st.set_page_config(page_title="Dr. Tabbal Resonance App", layout="wide")
-st.image("clinic_logo.jpg", width=150)
+st.image("clinic_logo.jpeg", width=150)
 st.title("Dr. Mahmoud Tabbal Diabetes Endocrine Center")
-st.image("dowsing_chart.jpg", width=400)
+st.image("dowsing_chart.jpeg", width=400)
 st.markdown("""<hr style='border:1px solid gray'>""", unsafe_allow_html=True)
 
-# Patient Input Section
 st.sidebar.header("Patient Information")
 patient_name = st.sidebar.text_input("Full Name")
 patient_email = st.sidebar.text_input("Email (optional)")
 test_date = st.sidebar.date_input("Date of Testing")
 
-# Session state
 if "index" not in st.session_state:
     st.session_state.index = 0
 if "data" not in st.session_state:
