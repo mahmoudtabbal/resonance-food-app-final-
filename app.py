@@ -9,8 +9,9 @@ def load_data():
     return pd.read_excel("Unified_Food_Compatibility_Table_With_Resonance.xlsx")
 
 st.set_page_config(page_title="Dr. Tabbal Resonance App", layout="wide")
-st.image("clinic_logo.jpg", width=150)
 st.title("Dr. Mahmoud Tabbal Diabetes Endocrine Center")
+st.markdown("<hr style='border:1px solid gray'>", unsafe_allow_html=True)
+st.image("clinic_logo.jpg", width=150)
 st.image("dowsing_chart.jpg", width=400)
 st.markdown("<hr style='border:1px solid gray'>", unsafe_allow_html=True)
 
