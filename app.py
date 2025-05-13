@@ -17,13 +17,13 @@ try:
     with col2:
         st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
 
-        logo = Image.open("clinic_logo.jpg")
+        logo = Image.open("dowsing_chart.jpg")
         st.image(logo, width=80)
 
         st.markdown("<h2>Dr. Mahmoud Tabbal</h2>", unsafe_allow_html=True)
         st.markdown("<h3>Diabetes Endocrine Center</h3>", unsafe_allow_html=True)
 
-        dowsing_chart = Image.open("dowsing_chart.jpg")
+        dowsing_chart = Image.open("clinic_logo.jpg")
         st.image(dowsing_chart, width=500)
 
         st.markdown("</div>", unsafe_allow_html=True)
