@@ -11,12 +11,16 @@ def load_data():
 
 st.set_page_config(page_title="Dr. Tabbal Resonance App", layout="wide")
 
-# Load images safely via PIL
-logo = Image.open("clinic_logo.jpg")
-chart = Image.open("dowsing_chart.jpg")
-st.image(logo, width=150)
-st.title("Dr. Mahmoud Tabbal Diabetes Endocrine Center")
-st.image(chart, width=400)
+# Load images with error handling
+try:
+    logo = Image.open("clinic_logo.jpg")
+    chart = Image.open("dowsing_chart.jpg")
+    st.image(logo, width=150)
+    st.title("Dr. Mahmoud Tabbal Diabetes Endocrine Center")
+    st.image(chart, width=400)
+except Exception as e:
+    st.error(f"Error loading images: {e}")
+
 st.markdown("<hr style='border:1px solid gray'>", unsafe_allow_html=True)
 
 st.sidebar.header("Patient Information")
