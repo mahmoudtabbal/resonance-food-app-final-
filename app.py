@@ -51,14 +51,20 @@ st.markdown(f"**Dosha:** {current['Dosha Compatibility']} | **Metabolic Type:** 
 
 resonance = st.selectbox("Select Resonance Compatibility", ["", "Compatible", "Incompatible", "Limited", "Neutral"])
 
-if st.button("Save and Next"):
-    st.session_state.data.at[st.session_state.index, "Resonance Compatibility"] = resonance
+if st.button("Save Compatibility"):
+    if resonance:
+        st.session_state.data.at[st.session_state.index, "Resonance Compatibility"] = resonance
+        st.success("Saved successfully. Now click 'Next Item' to continue.")
+    else:
+        st.warning("Please select a resonance value before saving.")
+
+if st.button("Next Item"):
     if st.session_state.index < len(st.session_state.data) - 1:
         st.session_state.index += 1
     else:
-        st.success("✅ All items processed!")
+        st.success("â You have reviewed all items!")
 
-with st.expander("📤 Generate PDF Report"):
+with st.expander("ð¤ Generate PDF Report"):
     dosha = st.selectbox("Filter by Dosha", ["All", "Vata", "Pitta", "Kapha", "Tridoshic"])
     metabolic_filter = st.selectbox("Filter by Metabolic Type", ["All", "Fast Oxidizer", "Slow Oxidizer", "Mixed Oxidizer"])
     resonance_filter = st.selectbox("Filter by Resonance", ["Compatible", "Incompatible", "Limited", "Neutral"])
@@ -92,5 +98,6 @@ with st.expander("📤 Generate PDF Report"):
     if st.button("Download PDF Report"):
         pdf_bytes = create_pdf(filtered)
         b64 = base64.b64encode(pdf_bytes).decode()
-        href = f'<a href="data:application/octet-stream;base64,{b64}" download="Resonance_Food_Report.pdf">📥 Download PDF</a>'
+        href = f'<a href="data:application/octet-stream;base64,{b64}" download="Resonance_Food_Report.pdf">ð¥ Download PDF</a>'
         st.markdown(href, unsafe_allow_html=True)
+
