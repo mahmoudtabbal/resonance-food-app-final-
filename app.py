@@ -148,7 +148,7 @@ with st.expander("📤 Export Patient Report with Filters"):
             output = io.BytesIO()
             with ExcelWriter(output, engine='xlsxwriter') as writer:
                 df.to_excel(writer, index=False, sheet_name='Resonance Data')
-                writer.save()
+                
             return output.getvalue()
 
         if st.button("📄 Download PDF"):
