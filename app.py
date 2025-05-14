@@ -7,7 +7,7 @@ from datetime import datetime
 
 @st.cache_data
 def load_data():
-    return pd.read_excel("Unified_Food_Compatibility_Table_With_Resonance.xlsx")
+    return pd.read_excel(open("Unified_Food_Compatibility_Table_With_Resonance.xlsx", "rb"))
 
 def classify_resonance(score):
     if score <= 20:
