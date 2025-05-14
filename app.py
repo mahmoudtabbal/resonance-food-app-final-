@@ -125,29 +125,30 @@ with st.expander("📤 Export Patient Report with Filters"):
             filtered = filtered[filtered["Resonance Category"] == resonance_filter]
 
         st.dataframe(filtered)
-
-        def generate_pdf(data):
-            pdf = FPDF()
-            pdf.add_page()
-            pdf.set_font("Arial", "B", 14)
-            pdf.cell(0, 10, "Dr. Mahmoud Tabbal - Food Resonance Report", ln=True, align="C")
-            pdf.set_font("Arial", "", 11)
-            pdf.ln(4)
-            pdf.cell(0, 10, f"Patient: {patient_name}", ln=True)
-            if patient_email:
-                pdf.cell(0, 10, f"Email: {patient_email}", ln=True)
-            pdf.cell(0, 10, f"Date: {test_date}", ln=True)
-            pdf.ln(5)
-            for _, row in data.iterrows():
-                pdf.multi_cell(0, 10,
-    f"{row['Item']} ({row['Category']})\n"
-    f"Score: {row['Resonance Score']} - {row['Resonance Category']}\n"
-    f"Dosha: {row['Dosha Compatibility']} | "
-    f"Metabolic: {row['Metabolic Typing Compatibility']} | "
-    f"Glandular: {row['Glandular Compatibility']}"
-)
-pdf.ln(2)
-            return pdf.output(dest='S').encode('latin1')
+def generate_pdf(data):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", "B", 14)
+    pdf.cell(0, 10, "Dr. Mahmoud Tabbal - Food Resonance Report", ln=True, align="C")
+    pdf.set_font("Arial", "", 11)
+    pdf.ln(4)
+    pdf.cell(0, 10, f"Patient: {patient_name}", ln=True)
+    if patient_email:
+        pdf.cell(0, 10, f"Email: {patient_email}", ln=True)
+    pdf.cell(0, 10, f"Date: {test_date}", ln=True)
+    pdf.ln(6)
+    pdf.cell(0, 10, "Filtered Results:", ln=True)
+    pdf.ln(3)
+    for _, row in data.iterrows():
+        pdf.multi_cell(0, 10,
+            f"{row['Item']} ({row['Category']})\n"
+            f"Score: {row['Resonance Score']} - {row['Resonance Category']}\n"
+            f"Dosha: {row['Dosha Compatibility']} | "
+            f"Metabolic: {row['Metabolic Typing Compatibility']} | "
+            f"Glandular: {row['Glandular Compatibility']}"
+        )
+        pdf.ln(2)
+    return pdf.output(dest='S').encode('latin1')
 
         def convert_df_to_excel(df):
             import io
