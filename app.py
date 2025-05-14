@@ -139,7 +139,14 @@ with st.expander("📤 Export Patient Report with Filters"):
             pdf.cell(0, 10, f"Date: {test_date}", ln=True)
             pdf.ln(5)
             for _, row in data.iterrows():
-                pdf.cell(0, 10, f"{row['Item']} ({row['Category']}) - Score: {row['Resonance Score']} - {row['Resonance Category']}", ln=True)
+                pdf.multi_cell(0, 10,
+    f"{row['Item']} ({row['Category']})\n"
+    f"Score: {row['Resonance Score']} - {row['Resonance Category']}\n"
+    f"Dosha: {row['Dosha Compatibility']} | "
+    f"Metabolic: {row['Metabolic Typing Compatibility']} | "
+    f"Glandular: {row['Glandular Compatibility']}"
+)
+pdf.ln(2)
             return pdf.output(dest='S').encode('latin1')
 
         def convert_df_to_excel(df):
